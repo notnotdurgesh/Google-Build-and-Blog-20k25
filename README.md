@@ -691,6 +691,6 @@ This project is licensed under the MIT License - see the individual service READ
 
 ---
 
-**Done with love and dedication by Reddy Durgeshwant** ❤️
+**Done with love and  little frustration by Reddy Durgeshwant** ❤️
 
 *PROBEAT Studio - Where AI meets musical creativity*
