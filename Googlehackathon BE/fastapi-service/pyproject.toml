@@ -1,0 +1,145 @@
+[build-system]
+requires = ["setuptools>=65.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "probeat-studio-ai-service"
+version = "1.0.0"
+description = "FastAPI AI service for PROBEAT Studio - AI-powered music generation using Google Gemini 2.5 Pro"
+readme = "README.md"
+license = {text = "MIT"}
+requires-python = ">=3.11"
+authors = [
+    {name = "PROBEAT Studio Team", email = "team@probeat.studio"},
+]
+maintainers = [
+    {name = "PROBEAT Studio Team", email = "team@probeat.studio"},
+]
+keywords = ["fastapi", "ai", "music", "generation", "google-adk", "gemini", "music-studio"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Framework :: FastAPI",
+    "Topic :: Multimedia :: Sound/Audio :: Analysis",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+dependencies = [
+    # Core ADK dependencies
+    "google-adk",
+    "google-genai",
+
+    # Web framework for streaming server
+    "fastapi>=0.104.0",
+    "uvicorn[standard]>=0.24.0",
+    "websockets>=12.0",
+
+    # Environment and utilities
+    "python-dotenv>=1.0.0",
+    "certifi>=2023.7.22",
+]
+
+[project.optional-dependencies]
+dev = [
+    "black>=23.0.0",
+    "isort>=5.12.0",
+    "flake8>=6.0.0",
+    "mypy>=1.5.0",
+    "pytest>=7.4.0",
+    "pytest-asyncio>=0.21.0",
+    "httpx>=0.25.0",
+]
+docs = [
+    "mkdocs>=1.5.0",
+    "mkdocs-material>=9.0.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/probeat-studio/ai-service"
+Documentation = "https://probeat-studio.github.io/ai-service/"
+Repository = "https://github.com/probeat-studio/ai-service.git"
+Issues = "https://github.com/probeat-studio/ai-service/issues"
+Changelog = "https://github.com/probeat-studio/ai-service/blob/main/CHANGELOG.md"
+
+[project.scripts]
+probeat-ai-service = "server:main"
+
+[tool.setuptools]
+zip-safe = false
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["multi_tool_agent*"]
+
+[tool.setuptools.package-data]
+multi_tool_agent = ["*.py"]
+
+[tool.black]
+line-length = 88
+target-version = ['py311']
+include = '\.pyi?$'
+extend-exclude = '''
+/(
+    \.eggs
+  | \.git
+  | \.hg
+  | \.mypy_cache
+  | \.tox
+  | \.venv
+  | _build
+  | buck-out
+  | build
+  | dist
+)/
+'''
+
+[tool.isort]
+profile = "black"
+multi_line_output = 3
+line_length = 88
+known_first_party = ["multi_tool_agent"]
+known_third_party = ["fastapi", "uvicorn", "google"]
+
+[tool.mypy]
+python_version = "3.11"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+disallow_incomplete_defs = true
+check_untyped_defs = true
+disallow_untyped_decorators = true
+no_implicit_optional = true
+warn_redundant_casts = true
+warn_unused_ignores = true
+warn_no_return = true
+warn_unreachable = true
+strict_equality = true
+
+[[tool.mypy.overrides]]
+module = [
+    "google.*",
+]
+ignore_missing_imports = true
+
+[tool.pytest.ini_options]
+minversion = "7.4"
+addopts = "-ra -q --strict-markers --strict-config"
+testpaths = ["tests"]
+python_files = "test_*.py"
+python_classes = "Test*"
+python_functions = "test_*"
+markers = [
+    "unit: Unit tests",
+    "integration: Integration tests",
+    "slow: Slow running tests",
+]
+filterwarnings = [
+    "error",
+    "ignore::UserWarning",
+    "ignore::DeprecationWarning",
+]
