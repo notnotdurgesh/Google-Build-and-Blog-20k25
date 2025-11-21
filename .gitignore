@@ -1,0 +1,26 @@
+./Googlehackathon BE/express-service/service-account-key.json
+yarn.lock
+.venv
+./Googlehackathon BE/fastapi-service/.venv
+./Googlehackathon BE/fastapi-service/CORS_FIX.md
+./Googlehackathon BE/fastapi-service/package-lock.json
+./Googlehackathon BE/fastapi-service/test
+
+# Backend Services - Express
+Googlehackathon BE/express-service/node_modules/
+Googlehackathon BE/express-service/*.log
+Googlehackathon BE/express-service/.env*
+
+# Backend Services - FastAPI
+Googlehackathon BE/fastapi-service/__pycache__/
+Googlehackathon BE/fastapi-service/*.pyc
+Googlehackathon BE/fastapi-service/*.pyo
+Googlehackathon BE/fastapi-service/.env*
+
+# Frontend
+Googlehackathon FE/node_modules/
+Googlehackathon FE/dist/
+Googlehackathon FE/build/
+Googlehackathon FE/.env*
+
+test/

@@ -1,0 +1,12 @@
+# Core ADK dependencies
+google-adk
+google-genai
+
+# Web framework for streaming server
+fastapi
+uvicorn[standard]
+websockets
+
+# Environment and utilities
+python-dotenv
+certifi
