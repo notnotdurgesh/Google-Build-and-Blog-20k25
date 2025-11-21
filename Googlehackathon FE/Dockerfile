@@ -5,11 +5,13 @@ FROM node:20 as build
 # Set working directory
 WORKDIR /app
 
-# Copy package files first for better caching
-COPY package*.json ./
+# Copy only package.json (not package-lock.json to avoid npm optional deps bug)
+COPY package.json ./
 
-# Install dependencies
-RUN npm install
+# Clear cache and install dependencies fresh to avoid npm bug with Rollup optional deps
+RUN npm cache clean --force && \
+    npm install --force && \
+    npm rebuild
 
 # Copy application code
 COPY . .
