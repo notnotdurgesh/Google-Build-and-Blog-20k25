@@ -8,13 +8,17 @@ WORKDIR /app
 # Copy only package.json (not package-lock.json to avoid npm optional deps bug)
 COPY package.json ./
 
-# Clear cache and install dependencies fresh to avoid npm bug with Rollup optional deps
+# Install dependencies with explicit handling of Rollup optional dependencies
 RUN npm cache clean --force && \
-    npm install --force && \
+    npm install && \
+    npm install @rollup/rollup-linux-x64-gnu --save-optional || true && \
     npm rebuild
 
-# Copy application code
+# Copy application code (package-lock.json is excluded via .dockerignore)
 COPY . .
+
+# Remove any package-lock.json that might have been copied
+RUN rm -f package-lock.json
 
 # Build the application
 RUN npm run build
