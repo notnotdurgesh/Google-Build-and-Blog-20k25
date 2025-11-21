@@ -33,7 +33,6 @@ export class StreamingChatService {
   private appName: string;
   private userId: string;
   private sessionId: string;
-  private sessionInfo: SessionInfo | null = null;
   private eventSource: EventSource | null = null;
   private currentMessageBuffer: string = '';
   private isConnected: boolean = false;
@@ -86,7 +85,6 @@ export class StreamingChatService {
       const sessionInfo: SessionInfo = await response.json();
       console.log('[SESSION] Session created:', sessionInfo);
 
-      this.sessionInfo = sessionInfo;
       this.isSessionCreated = true;
 
       return sessionInfo;
@@ -281,7 +279,6 @@ export class StreamingChatService {
       if (response.ok) {
         console.log('[SESSION] Session deleted');
         this.isSessionCreated = false;
-        this.sessionInfo = null;
       }
     } catch (error) {
       console.error('[SESSION] Error deleting session:', error);
@@ -305,7 +302,6 @@ export class StreamingChatService {
 
       if (response.ok) {
         const sessionInfo: SessionInfo = await response.json();
-        this.sessionInfo = sessionInfo;
         return sessionInfo;
       }
 
@@ -352,7 +348,6 @@ export class StreamingChatService {
     this.userId = this.generateUserId();
     this.sessionId = this.generateSessionId();
     this.isSessionCreated = false;
-    this.sessionInfo = null;
     this.reconnectAttempts = 0;
     await this.connect();
   }

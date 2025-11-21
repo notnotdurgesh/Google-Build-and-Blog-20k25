@@ -2,7 +2,7 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
 import * as Tone from 'tone';
 
-export type InstrumentType = 'piano';
+export type InstrumentType = 'kick' | 'snare' | 'hihat' | 'bass' | 'lead' | 'pad' | 'piano' | 'clap';
 
 export interface TrackSettings {
   pitch: number;
@@ -35,6 +35,13 @@ export const INITIAL_BPM = 120;
 
 const DEFAULT_SETTINGS: Record<InstrumentType, TrackSettings> = {
   piano: { pitch: 0, decay: 0.5, attack: 0.01, distortion: 0, sustain: 0.3, release: 0.8, cutoff: 20000, resonance: 1 },
+  kick: { pitch: 0, decay: 0.3, attack: 0.01, distortion: 0.2, sustain: 0.1, release: 0.2, cutoff: 8000, resonance: 2 },
+  snare: { pitch: 0, decay: 0.2, attack: 0.01, distortion: 0.1, sustain: 0.05, release: 0.1, cutoff: 12000, resonance: 1.5 },
+  hihat: { pitch: 0, decay: 0.1, attack: 0.01, distortion: 0.3, sustain: 0.02, release: 0.05, cutoff: 15000, resonance: 3 },
+  clap: { pitch: 0, decay: 0.15, attack: 0.01, distortion: 0.4, sustain: 0.03, release: 0.08, cutoff: 10000, resonance: 2.5 },
+  bass: { pitch: 0, decay: 0.8, attack: 0.02, distortion: 0.1, sustain: 0.6, release: 1.2, cutoff: 6000, resonance: 1 },
+  lead: { pitch: 0, decay: 0.4, attack: 0.05, distortion: 0.05, sustain: 0.7, release: 0.6, cutoff: 18000, resonance: 1 },
+  pad: { pitch: 0, decay: 2.0, attack: 0.3, distortion: 0, sustain: 0.8, release: 2.0, cutoff: 8000, resonance: 1 },
 };
 
 export const createTrack = (

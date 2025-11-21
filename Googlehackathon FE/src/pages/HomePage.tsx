@@ -246,7 +246,7 @@ export function HomePage() {
   const loadPresetsFromAPI = async () => {
     setIsLoadingPresets(true);
     try {
-      const [fetchedPresets, current] = await Promise.all([
+      const [, current] = await Promise.all([
         presetService.getPresets(),
         presetService.getCurrentPreset()
       ]);
