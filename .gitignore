@@ -23,4 +23,4 @@ Googlehackathon FE/dist/
 Googlehackathon FE/build/
 Googlehackathon FE/.env*
 
-test/
+test/*
