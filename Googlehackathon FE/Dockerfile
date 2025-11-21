@@ -8,6 +8,9 @@ WORKDIR /app
 # Copy package files first for better caching
 COPY package*.json ./
 
+# Remove package-lock.json to fix npm optional dependencies bug
+RUN rm -f package-lock.json
+
 # Install dependencies
 RUN npm install
 
